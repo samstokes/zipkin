@@ -1,3 +1,6 @@
+[submodule "cookbooks/cassandra"]
+	path = cookbooks/cassandra
+	url = https://github.com/samstokes/cassandra-chef-cookbook.git
 [submodule "cookbooks/zookeeper"]
 	path = cookbooks/zookeeper
 	url = https://github.com/phillip/chef-zookeeper.git
