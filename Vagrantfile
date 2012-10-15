@@ -26,6 +26,9 @@ Vagrant::Config.run do |config|
   config.vm.forward_port 7000, 7000
   config.vm.forward_port 9160, 9160
 
+  # Forward Scribe ports
+  config.vm.forward_port 1463, 1463
+
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"
     chef.add_recipe 'apt'
