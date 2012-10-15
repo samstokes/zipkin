@@ -1,6 +1,8 @@
 include_recipe 'apt'
 
 package 'build-essential'
+package 'automake'
+package 'autoconf'
 package 'libevent-dev'
 package 'libboost-dev'
 
@@ -37,4 +39,18 @@ bash "compile and install thrift" do
   BASH
 
   creates "#{PREFIX}/lib/pkgconfig/thrift.pc"
+end
+
+bash "compile and install fb303" do
+  cwd "/tmp/thrift-#{THRIFT_VERSION}/contrib/fb303"
+
+  code <<-BASH
+    set -e
+    find . -type f | xargs perl -p -i -e 's/facebook/apache/g'
+    ./bootstrap.sh
+    make
+    sudo make install
+  BASH
+
+  creates "#{PREFIX}/lib/libfb303.a"
 end
