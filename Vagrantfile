@@ -16,8 +16,15 @@ Vagrant::Config.run do |config|
   # physical device on your network.
   # config.vm.network :bridged
 
+  # Forward a port from the guest to the host, which allows for outside
+  # computers to access the VM, whereas host only networking does not.
+
+  # Forward Zookeeper ports
+  config.vm.forward_port 2181, 2181
+
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"
     chef.add_recipe 'apt'
+    chef.add_recipe 'zookeeper'
   end
 end
