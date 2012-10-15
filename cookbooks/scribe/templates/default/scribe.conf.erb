@@ -1,1 +1,12 @@
 port=1463
+
+<store>
+  category=zipkin
+  type=network
+  remote_host=10.0.2.2
+  remote_port=9410
+  use_conn_pool=yes
+  default_max_msg_before_reconnect=50000
+  allowable_delta_before_reconnect=12500
+  must_succeed=no
+</store>
