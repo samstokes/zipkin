@@ -6,14 +6,14 @@ package 'libboost-dev'
 
 
 PREFIX = '/usr/local'
-THRIFT_VERSION = '0.8.0'
+THRIFT_VERSION = '0.5.0'
 
 
 tempdir = Dir.tmpdir
 thrift_tgz = File.join(tempdir, "thrift-#{THRIFT_VERSION}.tar.gz")
 
 remote_file(thrift_tgz) do
-  source "https://dist.apache.org/repos/dist/release/thrift/#{THRIFT_VERSION}/thrift-#{THRIFT_VERSION}.tar.gz"
+  source "https://archive.apache.org/dist/incubator/thrift/#{THRIFT_VERSION}-incubating/thrift-#{THRIFT_VERSION}.tar.gz"
   action :create_if_missing
   mode '755'
 end
@@ -21,7 +21,7 @@ end
 bash "extract thrift tarball" do
   cwd '/tmp'
 
-  code "gunzip <#{thrift_tgz} | tar zxf -" # WTF - somehow we get a tar.gz.gz
+  code "tar zxf #{thrift_tgz}"
 
   creates "/tmp/thrift-#{THRIFT_VERSION}/configure"
 end
@@ -31,7 +31,7 @@ bash "compile and install thrift" do
 
   code <<-BASH
     set -e
-    ./configure
+    ./configure --with-php=no --with-php_extension=no --with-ruby=no --with-python=no
     make
     sudo make install
   BASH
