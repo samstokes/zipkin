@@ -121,3 +121,14 @@ bash "compile and install scribe" do
 
   not_if 'which scribed'
 end
+
+
+directory '/usr/local/scribe' do
+  owner 'root'
+end
+
+template '/usr/local/scribe/scribe.conf' do
+  source 'scribe.conf.erb'
+  owner 'root'
+  mode  0755
+end
